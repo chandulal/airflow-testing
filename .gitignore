@@ -1,0 +1,7 @@
+.idea
+venv/
+logs/
+airflow.db
+airflow.cfg
+*.pyc
+*.cfg
