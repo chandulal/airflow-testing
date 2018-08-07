@@ -18,11 +18,10 @@ class TestHelloWorldDAG(unittest.TestCase):
         dag_id='hello_world'
         dag = self.dagbag.get_dag(dag_id)
         tasks = dag.tasks
-        dummy_task = dag.get_task('dummy_task')
         task_ids = list(map(lambda task: task.task_id, tasks))
         self.assertListEqual(task_ids, ['dummy_task', 'hello_task'])
 
-    def test_contain_tasks(self):
+    def test_dependencies(self):
         """Check the task dependencies of dummy_task in hello_world dag"""
         dag_id='hello_world'
         dag = self.dagbag.get_dag(dag_id)
