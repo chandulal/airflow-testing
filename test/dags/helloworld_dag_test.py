@@ -19,7 +19,7 @@ class TestHelloWorldDAG(unittest.TestCase):
         dag = self.dagbag.get_dag(dag_id)
         tasks = dag.tasks
         task_ids = list(map(lambda task: task.task_id, tasks))
-        self.assertListEqual(task_ids, ['dummy_task', 'my_helloworld_operator_task','hello_task'])
+        self.assertListEqual(task_ids, ['dummy_task', 'multiplyby5_task','hello_task'])
 
     def test_dependencies_of_dummy_task(self):
         """Check the task dependencies of dummy_task in hello_world dag"""
@@ -30,7 +30,7 @@ class TestHelloWorldDAG(unittest.TestCase):
         upstream_task_ids = list(map(lambda task: task.task_id, dummy_task.upstream_list))
         self.assertListEqual(upstream_task_ids, [])
         downstream_task_ids = list(map(lambda task: task.task_id, dummy_task.downstream_list))
-        self.assertListEqual(downstream_task_ids, ['hello_task'])
+        self.assertListEqual(downstream_task_ids, ['hello_task', 'multiplyby5_task'])
 
     def test_dependencies_of_hello_task(self):
         """Check the task dependencies of hello_task in hello_world dag"""
