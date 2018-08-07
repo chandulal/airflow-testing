@@ -1,7 +1,6 @@
 import unittest
 from airflow.models import DagBag
 
-
 class TestHelloWorldDAG(unittest.TestCase):
     """Check HelloWorldDAG expectation"""
 
@@ -20,8 +19,6 @@ class TestHelloWorldDAG(unittest.TestCase):
         dag = self.dagbag.get_dag(dag_id)
         tasks = dag.tasks
         dummy_task = dag.get_task('dummy_task')
-        dummy_task.upstream_list
-        dummy_task.downstream_list
         task_ids = list(map(lambda task: task.task_id, tasks))
         self.assertListEqual(task_ids, ['dummy_task', 'hello_task'])
 
