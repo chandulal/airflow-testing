@@ -1,48 +1,38 @@
 import unittest
-
 from airflow.models import DagBag
 
 
-class TestDags(unittest.TestCase):
-    """Generic tests that all DAGs in the repository should be able to pass."""
+class TestDagIntegrity(unittest.TestCase):
 
-    AIRFLOW_ALERT_EMAIL = 'chandulal.kavar@grabtaxi.com'
     LOAD_SECOND_THRESHOLD = 2
 
     def setUp(self):
         self.dagbag = DagBag()
 
-    def test_dagbag_import(self):
-        """  Verify that Airflow will be able to import all DAGs in the repository. """
+    def test_import_dags(self):
         self.assertFalse(
             len(self.dagbag.import_errors),
-            'There should be no DAG failures. Got: {}'.format(
+            'DAG import failures. Errors: {}'.format(
                 self.dagbag.import_errors
             )
         )
 
-    def test_dagbag_import_time(self):
-        """ Verify that files describing DAGs load fast enough """
+    def test_import_time(self):
         stats = self.dagbag.dagbag_stats
-        slow_files = filter(lambda d: d.duration > self.LOAD_SECOND_THRESHOLD, stats)
-        res = ', '.join(map(lambda d: d.file[1:], slow_files))
+        slow_dags = filter(lambda d: d.duration > self.LOAD_SECOND_THRESHOLD, stats)
+        res = ', '.join(map(lambda d: d.file[1:], slow_dags))
 
-        self.assertEquals(
-            0,
-            len(slow_files),
-            'The following files take more than {threshold}s to load: {res}'.format(
-                threshold=self.LOAD_SECOND_THRESHOLD,
-                res=res
-            )
+        self.assertEquals(0,len(slow_dags),
+            'The following files take more than {threshold}s to load: {res}'.format(threshold=self.LOAD_SECOND_THRESHOLD, res=res)
         )
 
-    def test_dagbag_emails(self):
-        """ Verify that every DAG register alerts to the appropriate email address """
+    def test_alert_email_present(self):
+
         for dag_id, dag in self.dagbag.dags.iteritems():
-            email_list = dag.default_args.get('email', [])
-            msg = 'Alerts are not sent for DAG {id}'.format(id=dag_id)
-            self.assertIn(self.AIRFLOW_ALERT_EMAIL, email_list, msg)
+            emails = dag.default_args.get('email', [])
+            msg = 'Alert email not set for DAG {id}'.format(id=dag_id)
+            self.assertIn('alert.email@grabtaxi.com', emails, msg)
 
 
-suite = unittest.TestLoader().loadTestsFromTestCase(TestDags)
+suite = unittest.TestLoader().loadTestsFromTestCase(TestDagIntegrity)
 unittest.TextTestRunner(verbosity=2).run(suite)
