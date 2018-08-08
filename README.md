@@ -21,3 +21,8 @@ Run Operator Test (available inside airflow-testing/test/plugins/) using this co
 	python multiplyby5_operator_test.py
 	</pre>
 
+Run Sensor Test (available inside airflow-testing/test/plugins/) using this command:
+	<pre>
+	python helloworld_sensor.py
+	</pre>
+
