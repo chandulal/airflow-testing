@@ -24,11 +24,9 @@ class HelloworldSensor(BaseSensorOperator):
         return True
 
     def execute(self, context):
-        self.params['poke_count'] = 0
         while not self.poke(context):
-            self.params['poke_count'] = self.params.get('poke_count') + 1
             time.sleep(self.poke_interval)
-        return self.params.get('poke_count')
+        return self.params.get('sensor_start_time').minute
 
 
 class HelloworldSensorPlugin(AirflowPlugin):

@@ -9,7 +9,7 @@ class TestHelloworldSensor(unittest.TestCase):
 		dag = DAG(dag_id='anydag', start_date=datetime.now())
 		sensor_task = HelloworldSensor(
 			          task_id='any_sensor_task', 
-			          poke_interval=3, 
+			          poke_interval=2, 
 			          params={'sensor_start_time': datetime(2018, 8, 8, 10, 50)}, 
 			          dag=dag
 			        )
@@ -21,7 +21,7 @@ class TestHelloworldSensor(unittest.TestCase):
 		dag = DAG(dag_id='anydag', start_date=datetime.now())
 		sensor_task = HelloworldSensor(
 			          task_id='any_sensor_task', 
-			          poke_interval=3, 
+			          poke_interval=2, 
 			          params={'sensor_start_time': datetime(2018, 8, 8, 10, 9)}, 
 			          dag=dag
 			        )
@@ -33,13 +33,13 @@ class TestHelloworldSensor(unittest.TestCase):
 		dag = DAG(dag_id='anydag', start_date=datetime.now())
 		sensor_task = HelloworldSensor(
 			          task_id='any_sensor_task', 
-			          poke_interval=3, 
+			          poke_interval=2, 
 			          params={'sensor_start_time': datetime(2018, 8, 8, 10, 10)}, 
 			          dag=dag
 			        )
 		sti = TaskInstance(task=sensor_task, execution_date=datetime.now())
-		poke_count = sensor_task.execute(sti.get_template_context())
-		self.assertEqual(poke_count,2)
+		sensor_time = sensor_task.execute(sti.get_template_context())
+		self.assertEqual(sensor_time,12)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestHelloworldSensor)
 unittest.TextTestRunner(verbosity=2).run(suite)
