@@ -13,7 +13,7 @@ dummy_operator = DummyOperator(task_id='dummy_task', retries = 3, dag=dag)
 
 hello_operator = PythonOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
 
-multiplyby5_operator = MultiplyBy5Operator(my_operator_param='my_operator_param',
+multiplyby5_operator = MultiplyBy5Operator(my_operator_param=10,
                                 task_id='multiplyby5_task', dag=dag)
 
 dummy_operator >> hello_operator
