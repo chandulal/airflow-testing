@@ -5,3 +5,4 @@ airflow.db
 airflow.cfg
 *.pyc
 *.cfg
+target/
