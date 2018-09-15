@@ -31,7 +31,7 @@ class TestDagIntegrity(unittest.TestCase):
         for dag_id, dag in self.dagbag.dags.iteritems():
             emails = dag.default_args.get('email', [])
             msg = 'Alert email not set for DAG {id}'.format(id=dag_id)
-            self.assertIn('alert.email@grabtaxi.com', emails, msg)
+            self.assertIn('hello@world.com', emails, msg)
 
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestDagIntegrity)
