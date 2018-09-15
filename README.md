@@ -1,28 +1,24 @@
 # airflow-testing
 Airflow unit tests, DAG integrity tests, Pipeline definition tests
 
-How to run the tests?
+##Setup
+Install Python 2.7.13 using pyenv:
+<pre>
+brew install pyenv
+pyenv install 2.7.13
+pyenv global 2.7.13
+pyenv global (Verify the python version)
+</pre>
 
-For now, each test is test suit itself. You can run any test file available inside test directory using python command.
+Install Pip and PyBuilder
+<pre>
+easy_install pip
+pip install pybuilder
+</pre>
 
-
-Run DAG Integrity Test (available inside airflow-testing/test/dags/) using this command:
-	   <pre>
-	   python dag_integrity_test.py
-	   </pre>
-
-Run Pipeline Definition Test (available inside airflow-testing/test/dags/) using this command:
-	<pre>
-	python helloworld_dag_test.py
-	</pre>
-
-Run Operator Test (available inside airflow-testing/test/plugins/) using this command:
-	<pre>
-	python multiplyby5_operator_test.py
-	</pre>
-
-Run Sensor Test (available inside airflow-testing/test/plugins/) using this command:
-	<pre>
-	python helloworld_sensor.py
-	</pre>
-
+Go to project root directory and run these commands:
+<pre>
+pyb install_dependencies
+airflow initdb
+pyb run_unit_tests
+</pre>
