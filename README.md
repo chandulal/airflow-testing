@@ -1,7 +1,7 @@
 # airflow-testing
 Airflow unit tests, DAG integrity tests, Pipeline definition tests
 
-##Setup
+## Setup
 Install Python 2.7.13 using pyenv:
 <pre>
 brew install pyenv
