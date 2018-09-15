@@ -16,6 +16,11 @@ easy_install pip
 pip install pybuilder
 </pre>
 
+Set AIRFLOW_HOME
+<pre>
+export AIRFLOW_HOME={project dir}/airflow-testing/src/main/python
+</pre>
+
 Go to project root directory and run these commands:
 <pre>
 pyb install_dependencies
