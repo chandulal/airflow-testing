@@ -13,7 +13,3 @@ class TestMultiplyBy5Operator(unittest.TestCase):
         ti = TaskInstance(task=task, execution_date=datetime.now())
         result = task.execute(ti.get_template_context())
         self.assertEqual(result, 50)
-
-
-suite = unittest.TestLoader().loadTestsFromTestCase(TestMultiplyBy5Operator)
-unittest.TextTestRunner(verbosity=2).run(suite)

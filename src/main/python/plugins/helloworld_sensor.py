@@ -7,12 +7,13 @@ from airflow.utils.decorators import apply_defaults
 
 log = logging.getLogger(__name__)
 
+
 class HelloworldSensor(BaseSensorOperator):
 
     @apply_defaults
     def __init__(self, *args, **kwargs):
         super(HelloworldSensor, self).__init__(*args, **kwargs)
-    
+
     def poke(self, context):
         current_minute = self.params.get('sensor_start_time').minute
         if current_minute % 3 != 0:
@@ -32,6 +33,7 @@ class HelloworldSensor(BaseSensorOperator):
 class HelloworldSensorPlugin(AirflowPlugin):
     name = "helloworld_sensor_plugin"
     operators = [HelloworldSensor]
+
 
 def get_now():
     return datetime.now()
