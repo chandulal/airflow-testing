@@ -25,5 +25,14 @@ Go to project root directory and run these commands:
 <pre>
 pyb install_dependencies
 airflow initdb
+</pre>
+
+Please update $AIRFLOW_HOME/airflow.cfg:
+<pre>
+load_examples = False
+</pre>
+
+Run tests:
+<pre>
 pyb run_unit_tests
 </pre>
