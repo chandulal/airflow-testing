@@ -1,0 +1,139 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  type: ClusterIP
+  selector:
+    app: airflow
+    tier: db
+  ports:
+    - name: postgres
+      protocol: TCP
+      port: 5432
+      targetPort: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  type: ClusterIP
+  selector:
+    app: airflow
+    tier: backend
+  ports:
+    - port: 6379
+      name: redis
+      protocol: TCP
+      targetPort: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  type: NodePort
+  selector:
+    app: airflow
+    tier: web
+  ports:
+    - name: web
+      protocol: TCP
+      port: 8080
+      targetPort: web
+      nodePort: 31317
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: airflow
+        tier: db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:9.6
+        ports:
+        - name: postgres
+          containerPort: 5432
+        env:
+         - name: POSTGRES_USER
+           value: "airflow"
+         - name: POSTGRES_PASSWORD
+           value: "airflow"
+         - name: POSTGRES_DB
+           value: "airflow"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: airflow
+        tier: backend
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: redis
+        image: redis:3.2.7
+        ports:
+        - name: redis
+          containerPort: 6379
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: airflow
+        tier: web
+    spec:
+      securityContext:
+        runAsUser: 0
+        fsGroup: 0
+      restartPolicy: Always
+      containers:
+      - args:
+        - webserver
+        env:
+        - name: EXECUTOR
+          value: Celery
+        - name: FERNET_KEY
+          value: 46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+        - name: LOAD_EX
+          value: "n"
+        - name: POSTGRES_USER
+          value: "airflow"
+        - name: POSTGRES_PASSWORD
+          value: "airflow"
+        - name: POSTGRES_DB
+          value: "airflow"
+        - name: POSTGRES_HOST
+          value: "postgres"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        image: puckel/docker-airflow:1.10.1
+        name: webserver
+        ports:
+        - name: web
+          containerPort: 8080
