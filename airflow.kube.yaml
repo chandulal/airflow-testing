@@ -124,9 +124,12 @@ spec:
         runAsUser: 0
         fsGroup: 0
       volumes:
-        - name: airflowdir
+        - name: airflowdagdir
           hostPath:
-            path: "/data/"
+            path: "/data/dags/"
+        - name: airflowpluginsdir
+          hostPath:
+            path: "/data/plugins/"
       restartPolicy: Always
       containers:
       - args:
@@ -160,8 +163,10 @@ spec:
         - name: web
           containerPort: 8080
         volumeMounts:
-          - name: airflowdir
-            mountPath: "/usr/local/airflow"
+          - name: airflowdagdir
+            mountPath: "/usr/local/airflow/dags"
+          - name: airflowpluginsdir
+            mountPath: "/usr/local/airflow/plugins"
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -181,9 +186,12 @@ spec:
         runAsUser: 0
         fsGroup: 0
       volumes:
-        - name: airflowdir
+        - name: airflowdagdir
           hostPath:
-            path: "/data/"
+            path: "/data/dags/"
+        - name: airflowpluginsdir
+          hostPath:
+            path: "/data/plugins/"
       restartPolicy: Always
       containers:
       - args:
@@ -219,8 +227,10 @@ spec:
         - name: flower
           containerPort: 5555
         volumeMounts:
-          - name: airflowdir
-            mountPath: "/usr/local/airflow"
+          - name: airflowdagdir
+            mountPath: "/usr/local/airflow/dags"
+          - name: airflowpluginsdir
+            mountPath: "/usr/local/airflow/plugins"
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -239,9 +249,12 @@ spec:
         runAsUser: 0
         fsGroup: 0
       volumes:
-        - name: airflowdir
+        - name: airflowdagdir
           hostPath:
-            path: "/data/"
+            path: "/data/dags/"
+        - name: airflowpluginsdir
+          hostPath:
+            path: "/data/plugins/"
       containers:
       - args:
         - scheduler
@@ -271,8 +284,10 @@ spec:
         image: puckel/docker-airflow:1.10.1
         name: scheduler
         volumeMounts:
-          - name: airflowdir
-            mountPath: "/usr/local/airflow"
+          - name: airflowdagdir
+            mountPath: "/usr/local/airflow/dags"
+          - name: airflowpluginsdir
+            mountPath: "/usr/local/airflow/plugins"
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -288,9 +303,12 @@ spec:
     spec:
       restartPolicy: Always
       volumes:
-        - name: airflowdir
+        - name: airflowdagdir
           hostPath:
-            path: "/data/"
+            path: "/data/dags/"
+        - name: airflowpluginsdir
+          hostPath:
+            path: "/data/plugins/"
       containers:
       - args:
         - worker
@@ -317,8 +335,18 @@ spec:
           value: "6379"
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
+        - name: AIRFLOW__CORE__EXECUTOR
+          value: CeleryExecutor
+        - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+          value: "postgresql+psycopg2://airflow:airflow@postgres:5432/airflow"
+        - name: AIRFLOW__CELERY__RESULT_BACKEND
+          value: "db+postgresql://airflow:airflow@postgres:5432/airflow"
+        - name: AIRFLOW__CELERY__BROKER_URL
+          value: "redis://redis:6379/1"
         image: puckel/docker-airflow:1.10.1
         name: worker
         volumeMounts:
-          - name: airflowdir
-            mountPath: "/usr/local/airflow"
+          - name: airflowdagdir
+            mountPath: "/usr/local/airflow/dags"
+          - name: airflowpluginsdir
+            mountPath: "/usr/local/airflow/plugins"
