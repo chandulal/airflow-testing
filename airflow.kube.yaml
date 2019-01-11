@@ -75,6 +75,13 @@ spec:
       containers:
       - name: postgres
         image: postgres:9.6
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "200m"
+          limits:
+            memory: "128Mi"
+            cpu: "400m"
         ports:
         - name: postgres
           containerPort: 5432
@@ -102,6 +109,13 @@ spec:
       containers:
       - name: redis
         image: redis:3.2.7
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "200m"
+          limits:
+            memory: "64Mi"
+            cpu: "400m"
         ports:
         - name: redis
           containerPort: 6379
@@ -157,6 +171,8 @@ spec:
           value: "6379"
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
+        - name: AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG
+          value: "1"
         image: puckel/docker-airflow:1.10.1
         name: webserver
         ports:
@@ -222,6 +238,13 @@ spec:
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
         image: puckel/docker-airflow:1.10.1
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "200m"
+          limits:
+            memory: "128Mi"
+            cpu: "400m"
         name: flower
         ports:
         - name: flower
@@ -281,7 +304,16 @@ spec:
           value: "6379"
         - name: AIRFLOW_HOME
           value: "/usr/local/airflow"
+        - name: AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG
+          value: "1"
         image: puckel/docker-airflow:1.10.1
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "200m"
+          limits:
+            memory: "128Mi"
+            cpu: "400m"
         name: scheduler
         volumeMounts:
           - name: airflowdagdir
@@ -294,7 +326,7 @@ kind: Deployment
 metadata:
   name: worker
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -343,7 +375,16 @@ spec:
           value: "db+postgresql://airflow:airflow@postgres:5432/airflow"
         - name: AIRFLOW__CELERY__BROKER_URL
           value: "redis://redis:6379/1"
+        - name: AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG
+          value: "1"
         image: puckel/docker-airflow:1.10.1
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "200m"
+          limits:
+            memory: "1Gi"
+            cpu: "400m"
         name: worker
         volumeMounts:
           - name: airflowdagdir
