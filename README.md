@@ -36,3 +36,31 @@ Run tests:
 <pre>
 pyb run_unit_tests
 </pre>
+
+## Airflow Local/Dev Setup using Kubernetes
+
+1) Install minikube
+    <pre>
+    brew cask install minikube
+    brew install kubernetes-cli
+    minikube start --cpus 4 --memory 8192
+    </pre>
+2) Mount DAGs,Plugins, etc. in minikube
+    <pre> 
+    minikube mount {project dir}/src/main/python/:/data
+    </pre>
+3) Go to project root dir and run:
+    <pre> 
+    kubectl apply -f airflow.kube.yaml
+    </pre>
+    wait for 3-4 min to start all airflow components.
+4) Get Minikube ip:
+    <pre>
+    minikube ip
+    </pre>
+5) Now you can access: 
+
+    **Airflow UI:** <minikube-ip>:31317 
+   
+   **Flower:** <minikube-ip>:32081
+
