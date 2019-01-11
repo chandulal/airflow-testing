@@ -68,6 +68,6 @@ Follow this steps to install and run airflow on dev machine. This will setup fol
     minikube ip
     </pre>
 5) Now you can access: 
-    **Airflow UI:** <minikube-ip>:31317 
-    **Flower:** <minikube-ip>:32081
+    **Airflow UI:** {minikube-ip}:31317 
+    **Flower:** {minikube-ip}:32081
 
