@@ -1,0 +1,15 @@
+dag_id: mysql-ingestion-user
+start_date: 2011-01-05T00:00:00
+pattern:
+    extract:
+        - source: 1
+          srcTable: user
+          destTable: ingested_user
+    transform:
+        - transform: 1
+          srcTable: ingested_user
+          destTable: transformed_user
+    load:
+        - sink: 1
+          table: transformed_user
+
