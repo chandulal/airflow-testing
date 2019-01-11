@@ -1,7 +1,8 @@
-# airflow-testing
+# Airflow Testing & Local/Dev Setup using Kubernetes
+
+## Airflow Testing
 Airflow unit tests, DAG integrity tests and Pipeline definition tests
 
-## Setup
 Install Python 2.7.13 using pyenv:
 <pre>
 brew install pyenv
@@ -38,6 +39,14 @@ pyb run_unit_tests
 </pre>
 
 ## Airflow Local/Dev Setup using Kubernetes
+
+Follow this steps to install and run airflow on dev machine. This will setup following components: <br />
+   * Postgres (To store the metadata of airflow)
+   * Redis (Broker for celery executors)
+   * Airflow Scheduler
+   * Celery Workers
+   * Airflow Web Server
+   * Flower
 
 1) Install minikube
     <pre>
