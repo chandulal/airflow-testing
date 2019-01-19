@@ -326,7 +326,7 @@ kind: Deployment
 metadata:
   name: worker
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -377,13 +377,15 @@ spec:
           value: "redis://redis:6379/1"
         - name: AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG
           value: "1"
+        - name: AIRFLOW__CELERY__WORKER_CONCURRENCY
+          value: "1"
         image: puckel/docker-airflow:1.10.1
         resources:
           requests:
-            memory: "512Mi"
+            memory: "1Gi"
             cpu: "200m"
           limits:
-            memory: "1Gi"
+            memory: "1.5Gi"
             cpu: "400m"
         name: worker
         volumeMounts:
