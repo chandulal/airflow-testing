@@ -8,8 +8,10 @@ def get_minikube_ip():
     process.wait()
     if process.stdout is not None:
         minikube_ip = process.stdout.readline().strip()
+        if not minikube_ip:
+            raise Exception("Minikube is not running. Please, start minikube first.")
         return "http://%s:%s" % (minikube_ip, 31317)
-    raise Exception("Minikube is not running.")
+    raise Exception("Minikube is not running. Please, start minikube first.")
 
 
 def unpause_dag(dag_id):
