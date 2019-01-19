@@ -35,17 +35,10 @@ rest_api_plugin_version = __version__
 airflow_webserver_base_url = configuration.get('webserver', 'BASE_URL')
 airflow_base_log_folder = configuration.get('core', 'BASE_LOG_FOLDER')
 airflow_dags_folder = configuration.get('core', 'DAGS_FOLDER')
-log_loading = configuration.getboolean("rest_api_plugin", "LOG_LOADING") if configuration.has_option("rest_api_plugin",
-                                                                                                     "LOG_LOADING") else False
-filter_loading_messages_in_cli_response = configuration.getboolean("rest_api_plugin",
-                                                                   "FILTER_LOADING_MESSAGES_IN_CLI_RESPONSE") if configuration.has_option(
-    "rest_api_plugin", "FILTER_LOADING_MESSAGES_IN_CLI_RESPONSE") else True
-airflow_rest_api_plugin_http_token_header_name = configuration.get("rest_api_plugin",
-                                                                   "REST_API_PLUGIN_HTTP_TOKEN_HEADER_NAME") if configuration.has_option(
-    "rest_api_plugin", "REST_API_PLUGIN_HTTP_TOKEN_HEADER_NAME") else "rest_api_plugin_http_token"
-airflow_expected_http_token = configuration.get("rest_api_plugin",
-                                                "REST_API_PLUGIN_EXPECTED_HTTP_TOKEN") if configuration.has_option(
-    "rest_api_plugin", "REST_API_PLUGIN_EXPECTED_HTTP_TOKEN") else None
+log_loading = configuration.getboolean("rest_api_plugin", "LOG_LOADING") if configuration.has_option("rest_api_plugin", "LOG_LOADING") else False
+filter_loading_messages_in_cli_response = configuration.getboolean("rest_api_plugin", "FILTER_LOADING_MESSAGES_IN_CLI_RESPONSE") if configuration.has_option("rest_api_plugin", "FILTER_LOADING_MESSAGES_IN_CLI_RESPONSE") else True
+airflow_rest_api_plugin_http_token_header_name = configuration.get("rest_api_plugin", "REST_API_PLUGIN_HTTP_TOKEN_HEADER_NAME") if configuration.has_option("rest_api_plugin", "REST_API_PLUGIN_HTTP_TOKEN_HEADER_NAME") else "rest_api_plugin_http_token"
+airflow_expected_http_token = configuration.get("rest_api_plugin", "REST_API_PLUGIN_EXPECTED_HTTP_TOKEN") if configuration.has_option("rest_api_plugin", "REST_API_PLUGIN_EXPECTED_HTTP_TOKEN") else None
 
 # Using UTF-8 Encoding so that response messages don't have any characters in them that can't be handled
 os.environ['PYTHONIOENCODING'] = 'utf-8'
@@ -59,8 +52,7 @@ if log_loading:
     logging.info("\tairflow_webserver_base_url: " + str(airflow_webserver_base_url))
     logging.info("\tairflow_base_log_folder: " + str(airflow_base_log_folder))
     logging.info("\tairflow_dags_folder: " + str(airflow_dags_folder))
-    logging.info(
-        "\tairflow_rest_api_plugin_http_token_header_name: " + str(airflow_rest_api_plugin_http_token_header_name))
+    logging.info("\tairflow_rest_api_plugin_http_token_header_name: " + str(airflow_rest_api_plugin_http_token_header_name))
     logging.info("\tairflow_expected_http_token: OMITTED_FOR_SECURITY")
     logging.info("\tfilter_loading_messages_in_cli_response: " + str(filter_loading_messages_in_cli_response))
 
@@ -123,14 +115,10 @@ apis_metadata = [
         "airflow_version": "1.7.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True,
-             "cli_end_position": 2},
-            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)",
-             "form_input_type": "text", "required": True, "cli_end_position": 3},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True, "cli_end_position": 2},
+            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)", "form_input_type": "text", "required": True, "cli_end_position": 3},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -139,17 +127,12 @@ apis_metadata = [
         "airflow_version": "1.7.1 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "set", "description": "Set a variable. Expected input in the form: KEY VALUE.",
-             "form_input_type": "text", "required": False},
+            {"name": "set", "description": "Set a variable. Expected input in the form: KEY VALUE.", "form_input_type": "text", "required": False},
             {"name": "get", "description": "Get value of a variable", "form_input_type": "text", "required": False},
-            {"name": "json", "description": "Deserialize JSON variable", "form_input_type": "checkbox",
-             "required": False},
-            {"name": "default", "description": "Default value returned if variable does not exist",
-             "form_input_type": "text", "required": False},
-            {"name": "import", "description": "Import variables from JSON file", "form_input_type": "text",
-             "required": False},
-            {"name": "export", "description": "Export variables to JSON file", "form_input_type": "text",
-             "required": False},
+            {"name": "json", "description": "Deserialize JSON variable", "form_input_type": "checkbox", "required": False},
+            {"name": "default", "description": "Default value returned if variable does not exist", "form_input_type": "text", "required": False},
+            {"name": "import", "description": "Import variables from JSON file", "form_input_type": "text", "required": False},
+            {"name": "export", "description": "Export variables to JSON file", "form_input_type": "text", "required": False},
             {"name": "delete", "description": "Delete a variable", "form_input_type": "text", "required": False}
         ]
     },
@@ -162,12 +145,9 @@ apis_metadata = [
             {"name": "list", "description": "List all connections", "form_input_type": "checkbox", "required": False},
             {"name": "add", "description": "Add a connection", "form_input_type": "checkbox", "required": False},
             {"name": "delete", "description": "Delete a connection", "form_input_type": "checkbox", "required": False},
-            {"name": "conn_id", "description": "Connection id, required to add/delete a connection",
-             "form_input_type": "text", "required": False},
-            {"name": "conn_uri", "description": "Connection URI, required to add a connection",
-             "form_input_type": "text", "required": False},
-            {"name": "conn_extra", "description": "Connection 'Extra' field, optional when adding a connection",
-             "form_input_type": "text", "required": False}
+            {"name": "conn_id", "description": "Connection id, required to add/delete a connection", "form_input_type": "text", "required": False},
+            {"name": "conn_uri", "description": "Connection URI, required to add a connection", "form_input_type": "text", "required": False},
+            {"name": "conn_extra", "description": "Connection 'Extra' field, optional when adding a connection", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -176,10 +156,8 @@ apis_metadata = [
         "airflow_version": "1.7.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -188,10 +166,8 @@ apis_metadata = [
         "airflow_version": "1.7.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -200,32 +176,23 @@ apis_metadata = [
         "airflow_version": "1.8.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True,
-             "cli_end_position": 2},
-            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)",
-             "form_input_type": "text", "required": True, "cli_end_position": 3},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True, "cli_end_position": 2},
+            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)", "form_input_type": "text", "required": True, "cli_end_position": 3},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False}
         ]
     },
-    {  # todo: should print out the run id
+    {   # todo: should print out the run id
         "name": "trigger_dag",
         "description": "Trigger a DAG run",
         "airflow_version": "1.6.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False},
-            {"name": "run_id", "description": "Helps to identify this run", "form_input_type": "text",
-             "required": False},
-            {"name": "conf", "description": "JSON string that gets pickled into the DagRun's conf attribute",
-             "form_input_type": "text", "required": False},
-            {"name": "exec_date", "description": "The execution date of the DAG", "form_input_type": "text",
-             "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False},
+            {"name": "run_id", "description": "Helps to identify this run", "form_input_type": "text", "required": False},
+            {"name": "conf", "description": "JSON string that gets pickled into the DagRun's conf attribute", "form_input_type": "text", "required": False},
+            {"name": "exec_date", "description": "The execution date of the DAG", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -234,17 +201,12 @@ apis_metadata = [
         "airflow_version": "0.1 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True,
-             "cli_end_position": 2},
-            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)",
-             "form_input_type": "text", "required": True, "cli_end_position": 3},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False},
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True, "cli_end_position": 2},
+            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)", "form_input_type": "text", "required": True, "cli_end_position": 3},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False},
             {"name": "dry_run", "description": "Perform a dry run", "form_input_type": "checkbox", "required": False},
-            {"name": "task_params", "description": "Sends a JSON params dict to the task", "form_input_type": "text",
-             "required": False}
+            {"name": "task_params", "description": "Sends a JSON params dict to the task", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -253,12 +215,9 @@ apis_metadata = [
         "airflow_version": "1.8.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)",
-             "form_input_type": "text", "required": True, "cli_end_position": 2},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)", "form_input_type": "text", "required": True, "cli_end_position": 2},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -267,37 +226,20 @@ apis_metadata = [
         "airflow_version": "1.0.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True,
-             "cli_end_position": 2},
-            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)",
-             "form_input_type": "text", "required": True, "cli_end_position": 3},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False},
-            {"name": "mark_success", "description": "Mark jobs as succeeded without running them",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "force",
-             "description": "Ignore previous task instance state, rerun regardless if task already succeede",
-             "form_input_type": "checkbox", "required": False},
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True, "cli_end_position": 2},
+            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)", "form_input_type": "text", "required": True, "cli_end_position": 3},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False},
+            {"name": "mark_success", "description": "Mark jobs as succeeded without running them", "form_input_type": "checkbox", "required": False},
+            {"name": "force", "description": "Ignore previous task instance state, rerun regardless if task already succeede", "form_input_type": "checkbox", "required": False},
             {"name": "pool", "description": "Resource pool to use", "form_input_type": "text", "required": False},
-            {"name": "cfg_path", "description": "Path to config file to use instead of airflow.cfg",
-             "form_input_type": "text", "required": False},
-            {"name": "local", "description": "Run the task using the LocalExecutor", "form_input_type": "checkbox",
-             "required": False},
-            {"name": "ignore_all_dependencies",
-             "description": "Ignores all non-critical dependencies, including ignore_ti_state and ignore_task_depsstore_true",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "ignore_dependencies",
-             "description": "Ignore task-specific dependencies, e.g. upstream, depends_on_past, and retry delay dependencies",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "ignore_depends_on_past",
-             "description": "Ignore depends_on_past dependencies (but respect upstream dependencies)",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "ship_dag", "description": "Pickles (serializes) the DAG and ships it to the worker",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "pickle", "description": "Serialized pickle object of the entire dag (used internally)",
-             "form_input_type": "text", "required": False},
+            {"name": "cfg_path", "description": "Path to config file to use instead of airflow.cfg", "form_input_type": "text", "required": False},
+            {"name": "local", "description": "Run the task using the LocalExecutor", "form_input_type": "checkbox", "required": False},
+            {"name": "ignore_all_dependencies", "description": "Ignores all non-critical dependencies, including ignore_ti_state and ignore_task_depsstore_true", "form_input_type": "checkbox", "required": False},
+            {"name": "ignore_dependencies", "description": "Ignore task-specific dependencies, e.g. upstream, depends_on_past, and retry delay dependencies", "form_input_type": "checkbox", "required": False},
+            {"name": "ignore_depends_on_past", "description": "Ignore depends_on_past dependencies (but respect upstream dependencies)", "form_input_type": "checkbox", "required": False},
+            {"name": "ship_dag", "description": "Pickles (serializes) the DAG and ships it to the worker", "form_input_type": "checkbox", "required": False},
+            {"name": "pickle", "description": "Serialized pickle object of the entire dag (used internally)", "form_input_type": "text", "required": False},
         ]
     },
     {
@@ -306,11 +248,9 @@ apis_metadata = [
         "airflow_version": "0.1 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
             {"name": "tree", "description": "Tree view", "form_input_type": "checkbox", "required": False},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False}
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -319,33 +259,17 @@ apis_metadata = [
         "airflow_version": "0.1 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "task_regex", "description": "The regex to filter specific task_ids to backfill (optional)",
-             "form_input_type": "text", "required": False},
-            {"name": "start_date",
-             "description": "Override start_date YYYY-MM-DD. Either this or the end_date needs to be provided.",
-             "form_input_type": "text", "required": False},
-            {"name": "end_date",
-             "description": "Override end_date YYYY-MM-DD. Either this or the start_date needs to be provided.",
-             "form_input_type": "text", "required": False},
-            {"name": "mark_success", "description": "Mark jobs as succeeded without running them",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "local", "description": "Run the task using the LocalExecutor", "form_input_type": "checkbox",
-             "required": False},
-            {"name": "donot_pickle",
-             "description": "Do not attempt to pickle the DAG object to send over to the workers, just tell the workers to run their version of the code.",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "include_adhoc", "description": "Include dags with the adhoc argument.",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "ignore_dependencies",
-             "description": "Ignore task-specific dependencies, e.g. upstream, depends_on_past, and retry delay dependencies",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "ignore_first_depends_on_past",
-             "description": "Ignores depends_on_past dependencies for the first set of tasks only (subsequent executions in the backfill DO respect depends_on_past).",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False},
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "task_regex", "description": "The regex to filter specific task_ids to backfill (optional)", "form_input_type": "text", "required": False},
+            {"name": "start_date", "description": "Override start_date YYYY-MM-DD. Either this or the end_date needs to be provided.", "form_input_type": "text", "required": False},
+            {"name": "end_date", "description": "Override end_date YYYY-MM-DD. Either this or the start_date needs to be provided.", "form_input_type": "text", "required": False},
+            {"name": "mark_success", "description": "Mark jobs as succeeded without running them", "form_input_type": "checkbox", "required": False},
+            {"name": "local", "description": "Run the task using the LocalExecutor", "form_input_type": "checkbox", "required": False},
+            {"name": "donot_pickle", "description": "Do not attempt to pickle the DAG object to send over to the workers, just tell the workers to run their version of the code.", "form_input_type": "checkbox", "required": False},
+            {"name": "include_adhoc", "description": "Include dags with the adhoc argument.", "form_input_type": "checkbox", "required": False},
+            {"name": "ignore_dependencies", "description": "Ignore task-specific dependencies, e.g. upstream, depends_on_past, and retry delay dependencies", "form_input_type": "checkbox", "required": False},
+            {"name": "ignore_first_depends_on_past", "description": "Ignores depends_on_past dependencies for the first set of tasks only (subsequent executions in the backfill DO respect depends_on_past).", "form_input_type": "checkbox", "required": False},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False},
             {"name": "pool", "description": "Resource pool to use", "form_input_type": "text", "required": False},
             {"name": "dry_run", "description": "Perform a dry run", "form_input_type": "checkbox", "required": False}
         ]
@@ -356,10 +280,8 @@ apis_metadata = [
         "airflow_version": "0.1 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False},
-            {"name": "report", "description": "Show DagBag loading report", "form_input_type": "checkbox",
-             "required": False}
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False},
+            {"name": "report", "description": "Show DagBag loading report", "form_input_type": "checkbox", "required": False}
         ]
     },
     {
@@ -369,18 +291,13 @@ apis_metadata = [
         "http_method": "GET",
         "background_mode": True,
         "arguments": [
-            {"name": "principal", "description": "kerberos principal", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
+            {"name": "principal", "description": "kerberos principal", "form_input_type": "text", "required": True, "cli_end_position": 1},
             {"name": "keytab", "description": "keytab", "form_input_type": "text", "required": False},
             {"name": "pid", "description": "PID file location", "form_input_type": "text", "required": False},
-            {"name": "daemon", "description": "Daemonize instead of running in the foreground",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text",
-             "required": False}
+            {"name": "daemon", "description": "Daemonize instead of running in the foreground", "form_input_type": "checkbox", "required": False},
+            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text", "required": False},
+            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text", "required": False},
+            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -390,22 +307,14 @@ apis_metadata = [
         "http_method": "GET",
         "background_mode": True,
         "arguments": [
-            {"name": "do_pickle",
-             "description": "Attempt to pickle the DAG object to send over to the workers, instead of letting workers run their version of the code.",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "queues", "description": "Comma delimited list of queues to serve", "form_input_type": "text",
-             "required": False},
-            {"name": "concurrency", "description": "The number of worker processes", "form_input_type": "text",
-             "required": False},
+            {"name": "do_pickle", "description": "Attempt to pickle the DAG object to send over to the workers, instead of letting workers run their version of the code.", "form_input_type": "checkbox", "required": False},
+            {"name": "queues", "description": "Comma delimited list of queues to serve", "form_input_type": "text", "required": False},
+            {"name": "concurrency", "description": "The number of worker processes", "form_input_type": "text", "required": False},
             {"name": "pid", "description": "PID file location", "form_input_type": "checkbox", "required": False},
-            {"name": "daemon", "description": "Daemonize instead of running in the foreground",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text",
-             "required": False}
+            {"name": "daemon", "description": "Daemonize instead of running in the foreground", "form_input_type": "checkbox", "required": False},
+            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text", "required": False},
+            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text", "required": False},
+            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -415,23 +324,16 @@ apis_metadata = [
         "http_method": "GET",
         "background_mode": True,
         "arguments": [
-            {"name": "hostname", "description": "Set the hostname on which to run the server",
-             "form_input_type": "text", "required": False},
-            {"name": "port", "description": "The port on which to run the server", "form_input_type": "text",
-             "required": False},
-            {"name": "flower_conf", "description": "Configuration file for flower", "form_input_type": "text",
-             "required": False},
+            {"name": "hostname", "description": "Set the hostname on which to run the server", "form_input_type": "text", "required": False},
+            {"name": "port", "description": "The port on which to run the server", "form_input_type": "text", "required": False},
+            {"name": "flower_conf", "description": "Configuration file for flower", "form_input_type": "text", "required": False},
             {"name": "broker_api", "description": "Broker api", "form_input_type": "text", "required": False},
             {"name": "pid", "description": "PID file location", "form_input_type": "text", "required": False},
-            {"name": "daemon", "description": "Daemonize instead of running in the foreground",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text",
-             "required": False},
-        ]
+            {"name": "daemon", "description": "Daemonize instead of running in the foreground", "form_input_type": "checkbox", "required": False},
+            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text", "required": False},
+            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text", "required": False},
+            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text", "required": False},
+            ]
     },
     {
         "name": "scheduler",
@@ -441,24 +343,15 @@ apis_metadata = [
         "background_mode": True,
         "arguments": [
             {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": False},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False},
-            {"name": "run-duration", "description": "Set number of seconds to execute before exiting",
-             "form_input_type": "text", "required": False},
-            {"name": "num_runs", "description": "Set the number of runs to execute before exiting",
-             "form_input_type": "text", "required": False},
-            {"name": "do_pickle",
-             "description": "Attempt to pickle the DAG object to send over to the workers, instead of letting workers run their version of the code.",
-             "form_input_type": "text", "required": False},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False},
+            {"name": "run-duration", "description": "Set number of seconds to execute before exiting", "form_input_type": "text", "required": False},
+            {"name": "num_runs", "description": "Set the number of runs to execute before exiting", "form_input_type": "text", "required": False},
+            {"name": "do_pickle", "description": "Attempt to pickle the DAG object to send over to the workers, instead of letting workers run their version of the code.", "form_input_type": "text", "required": False},
             {"name": "pid", "description": "PID file location", "form_input_type": "checkbox", "required": False},
-            {"name": "daemon", "description": "Daemonize instead of running in the foreground",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text",
-             "required": False},
-            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text",
-             "required": False}
+            {"name": "daemon", "description": "Daemonize instead of running in the foreground", "form_input_type": "checkbox", "required": False},
+            {"name": "stdout", "description": "Redirect stdout to this file", "form_input_type": "text", "required": False},
+            {"name": "stderr", "description": "Redirect stderr to this file", "form_input_type": "text", "required": False},
+            {"name": "log-file", "description": "Location of the log file", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -467,14 +360,10 @@ apis_metadata = [
         "airflow_version": "1.0.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True,
-             "cli_end_position": 2},
-            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)",
-             "form_input_type": "text", "required": True, "cli_end_position": 3},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "task_id", "description": "The id of the task", "form_input_type": "text", "required": True, "cli_end_position": 2},
+            {"name": "execution_date", "description": "The execution date of the DAG (Example: 2017-01-02T03:04:05)", "form_input_type": "text", "required": True, "cli_end_position": 3},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False}
         ]
     },
     {
@@ -483,9 +372,7 @@ apis_metadata = [
         "airflow_version": "1.8.0 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "set",
-             "description": "Set pool slot count and description, respectively. Expected input in the form: NAME SLOT_COUNT POOL_DESCRIPTION.",
-             "form_input_type": "text", "required": False},
+            {"name": "set", "description": "Set pool slot count and description, respectively. Expected input in the form: NAME SLOT_COUNT POOL_DESCRIPTION.", "form_input_type": "text", "required": False},
             {"name": "get", "description": "Get pool info", "form_input_type": "text", "required": False},
             {"name": "delete", "description": "Delete a pool", "form_input_type": "text", "required": False}
         ]
@@ -504,26 +391,16 @@ apis_metadata = [
         "airflow_version": "0.1 or greater",
         "http_method": "GET",
         "arguments": [
-            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True,
-             "cli_end_position": 1},
-            {"name": "task_regex", "description": "The regex to filter specific task_ids to backfill (optional)",
-             "form_input_type": "text", "required": False},
-            {"name": "start_date", "description": "Override start_date YYYY-MM-DD", "form_input_type": "text",
-             "required": False},
-            {"name": "end_date", "description": "Override end_date YYYY-MM-DD", "form_input_type": "text",
-             "required": False},
-            {"name": "subdir", "description": "File location or directory from which to look for the dag",
-             "form_input_type": "text", "required": False},
-            {"name": "upstream", "description": "Include upstream tasks", "form_input_type": "checkbox",
-             "required": False},
-            {"name": "downstream", "description": "Include downstream tasks", "form_input_type": "checkbox",
-             "required": False},
-            {"name": "only_failed", "description": "Only failed jobs", "form_input_type": "checkbox",
-             "required": False},
-            {"name": "only_running", "description": "Only running jobs", "form_input_type": "checkbox",
-             "required": False},
-            {"name": "exclude_subdags", "description": "Exclude subdags", "form_input_type": "checkbox",
-             "required": False}
+            {"name": "dag_id", "description": "The id of the dag", "form_input_type": "text", "required": True, "cli_end_position": 1},
+            {"name": "task_regex", "description": "The regex to filter specific task_ids to backfill (optional)", "form_input_type": "text", "required": False},
+            {"name": "start_date", "description": "Override start_date YYYY-MM-DD", "form_input_type": "text", "required": False},
+            {"name": "end_date", "description": "Override end_date YYYY-MM-DD", "form_input_type": "text", "required": False},
+            {"name": "subdir", "description": "File location or directory from which to look for the dag", "form_input_type": "text", "required": False},
+            {"name": "upstream", "description": "Include upstream tasks", "form_input_type": "checkbox", "required": False},
+            {"name": "downstream", "description": "Include downstream tasks", "form_input_type": "checkbox", "required": False},
+            {"name": "only_failed", "description": "Only failed jobs", "form_input_type": "checkbox", "required": False},
+            {"name": "only_running", "description": "Only running jobs", "form_input_type": "checkbox", "required": False},
+            {"name": "exclude_subdags", "description": "Exclude subdags", "form_input_type": "checkbox", "required": False}
         ],
         "fixed_arguments": [
             {"name": "no_confirm", "description": "Do not request confirmation", "fixed_value": ""}
@@ -538,16 +415,10 @@ apis_metadata = [
         "form_enctype": "multipart/form-data",
         "arguments": [],
         "post_arguments": [
-            {"name": "dag_file", "description": "Python file to upload and deploy", "form_input_type": "file",
-             "required": True},
-            {"name": "force", "description": "Whether to forcefully upload the file if the file already exists or not",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "pause",
-             "description": "The DAG will be forced to be paused when created and override the 'dags_are_paused_at_creation' config.",
-             "form_input_type": "checkbox", "required": False},
-            {"name": "unpause",
-             "description": "The DAG will be forced to be unpaused when created and override the 'dags_are_paused_at_creation' config.",
-             "form_input_type": "checkbox", "required": False}
+            {"name": "dag_file", "description": "Python file to upload and deploy", "form_input_type": "file", "required": True},
+            {"name": "force", "description": "Whether to forcefully upload the file if the file already exists or not", "form_input_type": "checkbox", "required": False},
+            {"name": "pause", "description": "The DAG will be forced to be paused when created and override the 'dags_are_paused_at_creation' config.", "form_input_type": "checkbox", "required": False},
+            {"name": "unpause", "description": "The DAG will be forced to be unpaused when created and override the 'dags_are_paused_at_creation' config.", "form_input_type": "checkbox", "required": False}
         ]
     },
     {
@@ -573,8 +444,7 @@ def http_token_secure(func):
                 warning_message = "Token Authentication Failed"
                 logging.warn(warning_message)
                 base_response = REST_API_Response_Util.get_base_response(include_arguments=False)
-                return REST_API_Response_Util.get_403_error_response(base_response=base_response,
-                                                                     output=warning_message)
+                return REST_API_Response_Util.get_403_error_response(base_response=base_response, output=warning_message)
         return func(arg)
 
     return secure_check
@@ -611,15 +481,13 @@ class REST_API_Response_Util():
     @staticmethod
     def get_200_response(base_response, output=None, airflow_cmd=None, warning=None):
         logging.info("Returning a 200 Response Code with response '" + str(output) + "'")
-        return REST_API_Response_Util._get_final_response(base_response=base_response, output=output,
-                                                          airflow_cmd=airflow_cmd, warning=warning)
+        return REST_API_Response_Util._get_final_response(base_response=base_response, output=output, airflow_cmd=airflow_cmd, warning=warning)
 
     # Set the Base Response and an Error
     @staticmethod
     def _get_error_response(base_response, error_code, output=None):
         base_response["status"] = "ERROR"
-        return REST_API_Response_Util._get_final_response(base_response=base_response, output=output,
-                                                          http_response_code=error_code), error_code
+        return REST_API_Response_Util._get_final_response(base_response=base_response, output=output, http_response_code=error_code), error_code
 
     # Set the Base Response as a 400 HTTP Response object
     @staticmethod
@@ -652,6 +520,30 @@ class REST_API(BaseView):
     @staticmethod
     def get_dagbag():
         return DagBag()
+
+    # '/' Endpoint where the Admin page is which allows you to view the APIs available and trigger them
+    @expose('/')
+    def index(self):
+        logging.info("REST_API.index() called")
+
+        # get the information that we want to display on the page regarding the dags that are available
+        dagbag = self.get_dagbag()
+        dags = []
+        for dag_id in dagbag.dags:
+            orm_dag = DagModel.get_current(dag_id)
+            dags.append({
+                "dag_id": dag_id,
+                "is_active": (not orm_dag.is_paused) if orm_dag is not None else False
+            })
+
+        return self.render("rest_api_plugin/index.html",
+                           dags=dags,
+                           airflow_webserver_base_url=airflow_webserver_base_url,
+                           rest_api_endpoint=rest_api_endpoint,
+                           apis_metadata=apis_metadata,
+                           airflow_version=airflow_version,
+                           rest_api_plugin_version=rest_api_plugin_version
+                           )
 
     # '/api' REST Endpoint where API requests should all come in
     @csrf.exempt  # Exempt the CSRF token
@@ -693,15 +585,13 @@ class REST_API(BaseView):
                 dag_id = argument_value.strip()
         if len(missing_required_arguments) > 0:
             logging.warning("Missing required arguments: " + str(missing_required_arguments))
-            return REST_API_Response_Util.get_400_error_response(base_response, "The argument(s) " + str(
-                missing_required_arguments) + " are required")
+            return REST_API_Response_Util.get_400_error_response(base_response, "The argument(s) " + str(missing_required_arguments) + " are required")
 
         # Check to make sure that the DAG you're referring to, already exists.
         dag_bag = self.get_dagbag()
         if dag_id is not None and dag_id not in dag_bag.dags:
             logging.info("DAG_ID '" + str(dag_id) + "' was not found in the DagBag list '" + str(dag_bag.dags) + "'")
-            return REST_API_Response_Util.get_400_error_response(base_response,
-                                                                 "The DAG ID '" + str(dag_id) + "' does not exist")
+            return REST_API_Response_Util.get_400_error_response(base_response, "The DAG ID '" + str(dag_id) + "' does not exist")
 
         # Deciding which function to use based off the API object that was requested. Some functions are custom and need to be manually routed to.
         if api == "version":
@@ -725,8 +615,7 @@ class REST_API(BaseView):
         # getting the largest cli_end_position in the api_metadata object so that the cli function can be assembled
         largest_end_argument_value = 0
         for argument in api_metadata.get("arguments", []):
-            if argument.get("cli_end_position") is not None and argument[
-                "cli_end_position"] > largest_end_argument_value:
+            if argument.get("cli_end_position") is not None and argument["cli_end_position"] > largest_end_argument_value:
                 largest_end_argument_value = argument["cli_end_position"]
 
         # starting to create the airflow_cmd function
@@ -742,7 +631,7 @@ class REST_API(BaseView):
                 # if the argument should be appended onto the end, find the position and add it to the end_arguments array
                 if "cli_end_position" in argument:
                     logging.info("argument['cli_end_position']: " + str(argument['cli_end_position']))
-                    end_arguments[argument["cli_end_position"] - 1] = argument_value
+                    end_arguments[argument["cli_end_position"]-1] = argument_value
                 else:
                     airflow_cmd_split.extend(["--" + argument_name])
                     if argument["form_input_type"] is not "checkbox":
@@ -756,8 +645,7 @@ class REST_API(BaseView):
         for fixed_argument in api_metadata.get("fixed_arguments", []):
             fixed_argument_name = fixed_argument["name"]
             fixed_argument_value = fixed_argument.get("fixed_value")
-            logging.info("fixed_argument_name: " + str(fixed_argument_name) + ", fixed_argument_value: " + str(
-                fixed_argument_value))
+            logging.info("fixed_argument_name: " + str(fixed_argument_name) + ", fixed_argument_value: " + str(fixed_argument_value))
             if fixed_argument_value is not None:
                 airflow_cmd_split.extend(["--" + fixed_argument_name])
                 if fixed_argument_value:
@@ -793,8 +681,7 @@ class REST_API(BaseView):
             logging.info("Filtering Loading Messages from the CLI Response")
             output = self.filter_loading_messages(output)
 
-        return REST_API_Response_Util.get_200_response(base_response=base_response, output=output,
-                                                       airflow_cmd=airflow_cmd)
+        return REST_API_Response_Util.get_200_response(base_response=base_response, output=output, airflow_cmd=airflow_cmd)
 
     # Custom function for the version API
     def version(self, base_response):
@@ -810,8 +697,7 @@ class REST_API(BaseView):
     def deploy_dag(self, base_response):
         logging.info("Executing custom 'deploy_dag' function")
 
-        if 'dag_file' not in request.files or request.files[
-            'dag_file'].filename == '':  # check if the post request has the file part
+        if 'dag_file' not in request.files or request.files['dag_file'].filename == '':  # check if the post request has the file part
             logging.warning("The dag_file argument wasn't provided")
             return REST_API_Response_Util.get_400_error_response(base_response, "dag_file should be provided")
         dag_file = request.files['dag_file']
@@ -832,8 +718,7 @@ class REST_API(BaseView):
             # Check if the file already exists.
             if os.path.isfile(save_file_path) and not force:
                 logging.warning("File to upload already exists")
-                return REST_API_Response_Util.get_400_error_response(base_response,
-                                                                     "The file '" + save_file_path + "' already exists on host '" + hostname + "'.")
+                return REST_API_Response_Util.get_400_error_response(base_response, "The file '" + save_file_path + "' already exists on host '" + hostname + "'.")
 
             logging.info("Saving file to '" + save_file_path + "'")
             dag_file.save(save_file_path)
@@ -866,9 +751,7 @@ class REST_API(BaseView):
             warning = "Both options pause and unpause were given. Skipping setting the state (pause, unpause) of the DAG."
             logging.warning(warning)
 
-        return REST_API_Response_Util.get_200_response(base_response=base_response,
-                                                       output="DAG File [{}] has been uploaded".format(dag_file),
-                                                       warning=warning)
+        return REST_API_Response_Util.get_200_response(base_response=base_response, output="DAG File [{}] has been uploaded".format(dag_file), warning=warning)
 
     # Custom Function for the refresh_dag API
     # This will call the direct function corresponding to the web endpoint '/admin/airflow/refresh' that already exists in Airflow
@@ -879,8 +762,7 @@ class REST_API(BaseView):
         if self.is_arg_not_provided(dag_id):
             return REST_API_Response_Util.get_400_error_response(base_response, "dag_id should be provided")
         elif " " in dag_id:
-            return REST_API_Response_Util.get_400_error_response(base_response,
-                                                                 "dag_id contains spaces and is therefore an illegal argument")
+            return REST_API_Response_Util.get_400_error_response(base_response, "dag_id contains spaces and is therefore an illegal argument")
 
         try:
             from airflow.www.views import Airflow
@@ -892,8 +774,7 @@ class REST_API(BaseView):
             logging.error(error_message)
             return REST_API_Response_Util.get_500_error_response(base_response, error_message)
 
-        return REST_API_Response_Util.get_200_response(base_response=base_response,
-                                                       output="DAG [{}] is now fresh as a daisy".format(dag_id))
+        return REST_API_Response_Util.get_200_response(base_response=base_response, output="DAG [{}] is now fresh as a daisy".format(dag_id))
 
     # Executes the airflow command passed into it in the background so the function isn't tied to the webserver process
     @staticmethod
@@ -959,18 +840,25 @@ class REST_API(BaseView):
             output["stdout"] = "\n".join(new_stdout_array)
         return output
 
+# Creating View to be used by Plugin
+rest_api_view = REST_API(category="Admin", name="REST API Plugin")
 
-rest_api = Blueprint(
-    "rest_api",
+# Creating Blueprint
+rest_api_bp = Blueprint(
+    "rest_api_bp",
     __name__,
-    url_prefix='/admin/rest_api/'
+    template_folder='templates',
+    static_folder='static',
+    static_url_path='/static/'
 )
 
 
+# Creating the REST_API_Plugin which extends the AirflowPlugin so its imported into Airflow
 class REST_API_Plugin(AirflowPlugin):
     name = "rest_api"
     operators = []
-    flask_blueprints = [rest_api]
+    flask_blueprints = [rest_api_bp]
     hooks = []
     executors = []
+    admin_views = [rest_api_view]
     menu_links = []

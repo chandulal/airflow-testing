@@ -26,9 +26,11 @@ def pause_dag(dag_id):
 
 def trigger_dag(dag_id, execution_date):
     unpause_dag(dag_id)
-    return requests.get(
+    triggered_response= requests.get(
         "%s/admin/rest_api/api?api=trigger_dag&dag_id=%s&exec_date=%s" % (
             get_minikube_ip(), dag_id, execution_date))
+    if triggered_response.status_code != 200:
+        raise Exception("Please, wait for airflow web server to start.")
 
 
 def dag_state(dag_id, execution_date):

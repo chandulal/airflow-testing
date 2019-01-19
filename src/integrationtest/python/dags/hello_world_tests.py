@@ -15,9 +15,8 @@ class TestHelloWorldDag(unittest.TestCase):
         """helloword dag should run successfully"""
         execution_date = "2019-01-11T12:00:00+00:00"
         dag_id = "hello_world"
-        triggered_response = trigger_dag(dag_id, execution_date)
-        if triggered_response.status_code == 200:
-            is_running = True
-            while is_running:
-                is_running = is_dag_running(dag_id, execution_date)
-            self.assertEqual(is_running, False)
+        trigger_dag(dag_id, execution_date)
+        is_running = True
+        while is_running:
+            is_running = is_dag_running(dag_id, execution_date)
+        self.assertEqual(is_running, False)
