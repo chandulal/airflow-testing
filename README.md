@@ -73,4 +73,6 @@ Follow this steps to install and run airflow on dev machine. This will setup fol
     
     **Flower:** {minikube-ip}:32081
 
+## How it works?
+
 ![minkube_airflow_architecture](https://github.com/chandulal/airflow-testing/blob/master/how_minikube_work.png)
