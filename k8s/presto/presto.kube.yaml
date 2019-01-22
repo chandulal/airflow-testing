@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: presto
+spec:
+  selector:
+    presto: coordinator
+  type: NodePort
+  ports:
+    - port: 8080
+---
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: coordinator
+  labels:
+    presto: coordinator
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        presto: coordinator
+    spec:
+      containers:
+      - env:
+        - name: HTTP_SERVER_PORT
+          value: "8080"
+        - name: PRESTO_JVM_HEAP_SIZE
+          value: "8"
+        - name: PRESTO_MAX_MEMORY
+          value: "10"
+        - name: PRESTO_MAX_MEMORY_PER_NODE
+          value: "1"
+        image: johandry/presto
+        livenessProbe:
+          exec:
+            command:
+            - /etc/init.d/presto status | grep -q 'Running as'
+          failureThreshold: 3
+          periodSeconds: 300
+          timeoutSeconds: 10
+        name: presto-coordinator
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    presto: presto-worker
+  name: presto-worker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        presto: presto-worker
+    spec:
+      containers:
+      - env:
+        - name: HTTP_SERVER_PORT
+          value: "8080"
+        - name: PRESTO_JVM_HEAP_SIZE
+          value: "8"
+        - name: PRESTO_MAX_MEMORY
+          value: "10"
+        - name: PRESTO_MAX_MEMORY_PER_NODE
+          value: "1"
+        - name : COORDINATOR
+          value: "presto"
+        image: johandry/presto
+        livenessProbe:
+          exec:
+            command:
+            - /etc/init.d/presto status | grep -q 'Running as'
+          failureThreshold: 3
+          periodSeconds: 300
+          timeoutSeconds: 10
+        name: presto-worker
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always

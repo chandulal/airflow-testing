@@ -62,3 +62,15 @@ class AirflowAPI:
             return "failed"
         else:
             return "Not Defined"
+
+    def add_presto_connection(self, name, catalog, schema):
+        conn_uri = "presto://" + self.minikube_ip + ":32211/" + catalog + "/" + schema
+        return requests.get(
+            "%s/admin/rest_api/api?api=connections&add=on&conn_id=%s&conn_uri=%s" % (
+                self.get_airflow_url(), name, conn_uri))
+
+    def add_mysql_connection(self, name, user, password, database):
+        conn_uri = "mysql://" + user + ":" + password + "@" + self.minikube_ip + ":31320/" + database
+        return requests.get(
+            "%s/admin/rest_api/api?api=connections&add=on&conn_id=%s&conn_uri=%s" % (
+                self.get_airflow_url(), name, conn_uri))
