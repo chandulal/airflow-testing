@@ -20,3 +20,4 @@ class TestHelloWorldDag(unittest.TestCase):
         while is_running:
             is_running = self.airflow_api.is_dag_running(dag_id, execution_date)
         self.assertEqual(is_running, False)
+        self.assertEqual(self.airflow_api.get_dag_status(dag_id, execution_date), "success")

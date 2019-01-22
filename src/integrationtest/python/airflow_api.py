@@ -45,8 +45,20 @@ class AirflowAPI:
         response = self.dag_state(dag_id, execution_date)
         json_response = json.loads(response.text)
         print(json_response)
-        if "success" not in json_response['output']['stdout']:
+        if "running" in json_response['output']['stdout']:
             return True
         else:
             self.pause_dag(dag_id)
             return False
+
+    def get_dag_status(self, dag_id, execution_date):
+        response = self.dag_state(dag_id, execution_date)
+        json_response = json.loads(response.text)
+        if "running" in json_response['output']['stdout']:
+            return "running"
+        elif "success" in json_response['output']['stdout']:
+            return "success"
+        elif "failed" in json_response['output']['stdout']:
+            return "failed"
+        else:
+            return "Not Defined"
