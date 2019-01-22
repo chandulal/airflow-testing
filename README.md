@@ -47,6 +47,12 @@ Follow this steps to install and run airflow on dev machine. This will setup fol
    * Celery Workers
    * Airflow Web Server
    * Flower
+   
+Prerequisite:
+    <pre>
+    git clone https://github.com/chandulal/airflow-testing.git
+    brew cask install virtualbox (run if you don't have virtual box installed)
+    </pre>
 
 1) Install minikube
     <pre>
@@ -58,7 +64,7 @@ Follow this steps to install and run airflow on dev machine. This will setup fol
     <pre> 
     minikube mount {project dir}/src/main/python/:/data
     </pre>
-3) Go to project root dir and run:
+3) Open new terminal. Go to project root dir and run:
     <pre> 
     kubectl apply -f airflow.kube.yaml
     </pre>
