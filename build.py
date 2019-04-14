@@ -7,6 +7,7 @@ def initialize(project):
     project.depends_on("apache-airflow", "==1.9.0")
     project.depends_on("cryptography", "==2.2.1")
     project.depends_on("requests", "==2.21.0")
+    project.depends_on("mysqlclient", "==1.4.2")
     project.set_property('verbose', True)
 
 use_plugin("exec")
