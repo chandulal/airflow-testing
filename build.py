@@ -8,6 +8,7 @@ def initialize(project):
     project.depends_on("cryptography", "==2.2.1")
     project.depends_on("requests", "==2.21.0")
     project.depends_on("mysqlclient", "==1.4.2")
+    project.depends_on("snakebite","==2.11.0")
     project.set_property('verbose', True)
 
 use_plugin("exec")
