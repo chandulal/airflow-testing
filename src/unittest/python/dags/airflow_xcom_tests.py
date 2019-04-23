@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from airflow.models import DagBag, settings,TaskInstance
+from airflow.models import DagBag,TaskInstance
 
 
 

@@ -2,8 +2,6 @@ import datetime
 from airflow import models
 from airflow.operators import PythonOperator
 from airflow.operators import BashOperator
-from airflow.utils import trigger_rule
-from airflow.utils.decorators import apply_defaults
 
 
 yesterday = datetime.datetime.combine(
