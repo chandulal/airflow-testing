@@ -9,7 +9,11 @@ spec:
     presto: coordinator
   type: NodePort
   ports:
-    - port: 8080
+    - name: coordinator
+      port: 8080
+      protocol: TCP
+      targetPort: coordinator
+      nodePort: 32211
 ---
 kind: Deployment
 apiVersion: apps/v1beta1
@@ -44,7 +48,8 @@ spec:
           timeoutSeconds: 10
         name: presto-coordinator
         ports:
-        - containerPort: 8080
+        - name: coordinator
+          containerPort: 8080
       restartPolicy: Always
 ---
 apiVersion: apps/v1beta1
