@@ -29,6 +29,7 @@ class AirflowAPI:
             "%s/admin/rest_api/api?api=pause&dag_id=%s" % (self.get_airflow_url(), dag_id))
 
     def trigger_dag(self, dag_id, execution_date):
+        self.clear_dag(dag_id, execution_date);
         self.unpause_dag(dag_id)
         triggered_response = requests.get(
             "%s/admin/rest_api/api?api=trigger_dag&dag_id=%s&exec_date=%s" % (
@@ -39,6 +40,11 @@ class AirflowAPI:
     def dag_state(self, dag_id, execution_date):
         return requests.get(
             "%s/admin/rest_api/api?api=dag_state&dag_id=%s&execution_date=%s" % (
+                self.get_airflow_url(), dag_id, execution_date))
+
+    def clear_dag(self, dag_id, execution_date):
+        return requests.get(
+            "%s/admin/rest_api/api?api=clear&dag_id=%s&execution_date=%s" % (
                 self.get_airflow_url(), dag_id, execution_date))
 
     def is_dag_running(self, dag_id, execution_date):
