@@ -14,7 +14,7 @@ pyenv global (Verify the python version)
 Install Pip and PyBuilder
 <pre>
 easy_install pip
-pip install pybuilder
+pip install pybuilder pyhive
 </pre>
 
 Set AIRFLOW_HOME
@@ -22,9 +22,17 @@ Set AIRFLOW_HOME
 export AIRFLOW_HOME={project dir}/src/main/python
 </pre>
 
+For Mac users, run following commands to install dependencies
+<pre>
+brew install mysql
+export PATH=$PATH:/usr/local/mysql/bin
+pip install MySQL-Python
+</pre>
+
 Go to project root directory and run these commands:
 <pre>
 pyb install_dependencies
+pip install 'apache-airflow[kubernetes]'
 airflow initdb
 </pre>
 
@@ -47,7 +55,7 @@ Follow this steps to install and run airflow on dev machine. This will setup fol
    * Celery Workers
    * Airflow Web Server
    * Flower
-   
+
 Prerequisite:
     <pre>
     git clone https://github.com/chandulal/airflow-testing.git
