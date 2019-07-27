@@ -18,7 +18,7 @@ class TestDagIntegrity(unittest.TestCase):
 
     def test_import_time(self):
         stats = self.dagbag.dagbag_stats
-        slow_dags = filter(lambda d: d.duration > self.LOAD_SECOND_THRESHOLD, stats)
+        slow_dags = list(filter(lambda d: d.duration > self.LOAD_SECOND_THRESHOLD, stats))
         res = ', '.join(map(lambda d: d.file[1:], slow_dags))
 
         self.assertEquals(0, len(slow_dags),
@@ -27,7 +27,7 @@ class TestDagIntegrity(unittest.TestCase):
                           )
 
     def test_alert_email_present(self):
-        for dag_id, dag in self.dagbag.dags.iteritems():
+        for dag_id, dag in self.dagbag.dags.items():
             emails = dag.default_args.get('email', [])
             msg = 'Alert email not set for DAG {id}'.format(id=dag_id)
             self.assertIn('hello@world.com', emails, msg)
