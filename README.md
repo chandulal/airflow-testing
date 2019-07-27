@@ -1,14 +1,13 @@
 # Airflow Testing & Local/Dev Setup using Kubernetes
 
-## Airflow Testing
-Airflow unit tests, DAG integrity tests and Pipeline definition tests
+## Airflow Unit Testing
 
 Go to project root directory and build the image
 <pre>
 docker build . -t airflow-test
 </pre>
 
-Run unit tests from the docker
+Run the unit tests from the docker
 <pre>
 docker run -ti --rm -v <Source Dir>/airflow-testing:/opt airflow-test pyb run_unit_tests
 </pre>
