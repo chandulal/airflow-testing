@@ -9,7 +9,7 @@ docker build . -t airflow-test
 
 Run the unit tests from the docker
 <pre>
-docker run -ti --rm -v <Source Dir>/airflow-testing:/opt airflow-test pyb run_unit_tests
+docker run -ti --rm -v {SourceDir}/airflow-testing:/opt airflow-test pyb run_unit_tests
 </pre>
 
 ## Airflow Local/Dev Setup using Kubernetes
