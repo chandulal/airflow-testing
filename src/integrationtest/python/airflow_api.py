@@ -1,6 +1,6 @@
 import requests
 import json
-import subprocess
+import os
 
 
 class AirflowAPI:
@@ -8,14 +8,13 @@ class AirflowAPI:
         self.minikube_ip = self.get_minikube_ip()
 
     def get_minikube_ip(self):
-        process = subprocess.Popen(["minikube", "ip"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        process.wait()
-        if process.stdout is not None:
-            minikube_ip = process.stdout.readline().strip()
-            if not minikube_ip:
-                raise Exception("Minikube is not running. Please, start minikube first.")
-            return minikube_ip
-        raise Exception("Minikube is not running. Please, start minikube first.")
+        # minikube_ip = os.environ['MINIKUBE_IP']
+        f = open("minikube_ip.txt", "r")
+        minikube_ip = f.readlines()[0].replace('\n', '')
+        if not minikube_ip:
+            raise Exception("Minikube is not running. Please, start minikube first.")
+        f.close()
+        return minikube_ip
 
     def get_airflow_url(self):
         return "http://%s:%s" % (self.minikube_ip, 31317)
