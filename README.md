@@ -7,7 +7,7 @@ Go to project root directory and build the image
 docker build . -t airflow-test
 </pre>
 
-Run the unit tests from the docker. Use your repository location fo **{SourceDir}**
+Run the unit tests from the docker. Use your repository location for **{SourceDir}**
 <pre>
 docker run -ti  -v {SourceDir}/airflow-testing:/opt --entrypoint /mnt/entrypoint.sh airflow-test run_unit_tests
 </pre>
