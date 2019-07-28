@@ -7,9 +7,9 @@ Go to project root directory and build the image
 docker build . -t airflow-test
 </pre>
 
-Run the unit tests from the docker
+Run the unit tests from the docker. Use your repository location fo **{SourceDir}**
 <pre>
-docker run -ti --rm -v {SourceDir}/airflow-testing:/opt airflow-test pyb run_unit_tests
+docker run -ti  -v {SourceDir}/airflow-testing:/opt --entrypoint /mnt/entrypoint.sh airflow-test run_unit_tests
 </pre>
 
 ## Airflow Local/Dev Setup using Kubernetes
