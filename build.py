@@ -1,4 +1,5 @@
-from pybuilder.core import init,use_plugin
+from pybuilder.core import init, use_plugin
+
 
 @init
 def initialize(project):
@@ -9,7 +10,10 @@ def initialize(project):
     project.depends_on("werkzeug", "==0.15.0")
     project.depends_on("pyhive", "==0.6.1")
     project.depends_on("mysqlclient", "==1.4.2")
+    project.depends_on("mysql-connector", "==2.2.9")
+    project.depends_on("presto-python-client", "==0.7.0")
     project.set_property('verbose', True)
+
 
 use_plugin("exec")
 use_plugin("python.core")
@@ -18,4 +22,3 @@ use_plugin('python.install_dependencies')
 use_plugin('python.integrationtest')
 
 default_task = ['clean']
-

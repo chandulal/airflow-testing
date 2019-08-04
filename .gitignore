@@ -6,3 +6,6 @@ airflow.cfg
 *.pyc
 *.cfg
 target/
+.minikube/
+.pytest_cache/
+*.DS_Store
