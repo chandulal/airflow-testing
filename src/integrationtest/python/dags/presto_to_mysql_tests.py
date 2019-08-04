@@ -3,12 +3,20 @@ import unittest
 
 sys.path.append('../')
 from airflow_api import AirflowAPI
+from db_util import DBUtil
+from constants import PRESTO_DB_PORT,MYSQL_DB_PORT
 
 
 class TestPrestoToMySqlDag(unittest.TestCase):
     """Integration test for presto to mysql transfer"""
 
     def setUp(self):
+        presto_catlog="blackhole"
+        presto_schema= "default"
+        mysql_database="mysql"
+        mysql_user="mysql"
+        mysql_password="mysql"
+
         self.airflow_api = AirflowAPI()
         self.airflow_api.add_presto_connection("presto-conn", "tpch", "sf1")
         self.airflow_api.add_mysql_connection("mysql-conn", "mysql", "mysql", "mysql")
