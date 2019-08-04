@@ -17,7 +17,7 @@ class AirflowAPI:
         return minikube_ip
 
     def get_airflow_url(self):
-        return "http://%s:%s" % (self.minikube_ip, 31317)
+        return "http://%s:%s" % (self.minikube_ip, AIRFLOW_PORT)
 
     def unpause_dag(self, dag_id):
         return requests.get(
@@ -69,13 +69,13 @@ class AirflowAPI:
             return "Not Defined"
 
     def add_presto_connection(self, name, catalog, schema):
-        conn_uri = "presto://" + self.minikube_ip + ":32211/" + catalog + "/" + schema
+        conn_uri = "presto://" + self.minikube_ip + ":"+str(PRESTO_DB_PORT)+"/" + catalog + "/" + schema
         return requests.get(
             "%s/admin/rest_api/api?api=connections&add=on&conn_id=%s&conn_uri=%s" % (
                 self.get_airflow_url(), name, conn_uri))
 
     def add_mysql_connection(self, name, user, password, database):
-        conn_uri = "mysql://" + user + ":" + password + "@" + self.minikube_ip + ":31320/" + database
+        conn_uri = "mysql://" + user + ":" + password + "@" + self.minikube_ip + ":"+str(MYSQL_DB_PORT)+"/" + database
         return requests.get(
             "%s/admin/rest_api/api?api=connections&add=on&conn_id=%s&conn_uri=%s" % (
                 self.get_airflow_url(), name, conn_uri))
