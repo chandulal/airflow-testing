@@ -1,6 +1,6 @@
 import requests
 import json
-import os
+from constants import AIRFLOW_PORT,MYSQL_DB_PORT,PRESTO_DB_PORT
 
 
 class AirflowAPI:
@@ -8,8 +8,7 @@ class AirflowAPI:
         self.minikube_ip = self.get_minikube_ip()
 
     def get_minikube_ip(self):
-        # minikube_ip = os.environ['MINIKUBE_IP']
-        f = open("minikube_ip.txt", "r")
+        f = open("/tmp/minikube_ip.txt", "r")
         minikube_ip = f.readlines()[0].replace('\n', '')
         if not minikube_ip:
             raise Exception("Minikube is not running. Please, start minikube first.")

@@ -16,9 +16,9 @@ PrestoToMySqlTransfer(
     task_id='presto_to_mysql_transfer',
     sql="""
        SELECT name, count(*) as count
-       FROM tpch.sf1.region
+       FROM blackhole.default.region
        GROUP BY name
        """,
-    mysql_table='region',
-    mysql_preoperator='TRUNCATE TABLE region;',
+    mysql_table='mysql_region',
+    mysql_preoperator='TRUNCATE TABLE mysql_region;',
     dag=dag)
