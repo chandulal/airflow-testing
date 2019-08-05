@@ -1,0 +1,7 @@
+apache-airflow==1.10.3
+jinja2==2.10.0
+werkzeug==0.15.0
+pyhive==0.6.1
+mysqlclient==1.4.2
+mysql-connector==2.2.9
+presto-python-client==0.7.0

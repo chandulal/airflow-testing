@@ -13,6 +13,7 @@ ENV AIRFLOW_HOME /usr/local/airflow
 WORKDIR /opt
 
 COPY build.py .
+COPY requirements.txt .
 COPY script/entrypoint.sh /mnt/entrypoint.sh
 COPY src/unittest/python/resources/variables.json /usr/local/airflow/variables.json
 COPY src/unittest/python/resources/connections.sh /usr/local/airflow/connections.sh
@@ -22,6 +23,7 @@ RUN chmod +x /mnt/entrypoint.sh
 RUN apt update && apt upgrade -y && pip install -U pip && \
   pip install pybuilder && \
   pyb install_dependencies && \
+  pip install -r requirements.txt && \
   airflow initdb && \
   airflow variables -i /usr/local/airflow/variable.json && \
   sh /usr/local/airflow/connections.sh
