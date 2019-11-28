@@ -1,4 +1,4 @@
-apache-airflow==1.10.3
+apache-airflow==1.10.6
 jinja2==2.10.1
 werkzeug==0.15.3
 pyhive==0.6.1
