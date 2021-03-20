@@ -1,5 +1,5 @@
 apache-airflow==1.10.11
-jinja2==2.10.1
+jinja2==2.11.3
 werkzeug==0.15.3
 pyhive==0.6.1
 mysqlclient==1.4.2
