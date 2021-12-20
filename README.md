@@ -94,3 +94,5 @@ available in this repo, we required MySQL and Presto on minikube.
 2. Run the integration tests from the docker. Use absolute path of this repository in your machine for **{SourceDir}**
 
      ```docker run -ti  -v {SourceDir}/airflow-testing:/opt --entrypoint /mnt/entrypoint.sh airflow-test run_integration_tests {minikube-ip} ```
+     
+EDITED BY ME
